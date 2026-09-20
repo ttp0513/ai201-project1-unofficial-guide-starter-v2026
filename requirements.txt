@@ -3,6 +3,7 @@
 #
 # Supported Python: 3.11, 3.12, or 3.13. NOT 3.14 — it ships as the default on
 # recent macOS versions and several of these packages don't support it yet.
+# On Windows, use Python 3.11 for the prebuilt chroma-hnswlib 0.7.6 wheel.
 
 # Loads your API key out of .env
 python-dotenv>=1.0,<1.2

@@ -25,12 +25,18 @@ python test.py
 **Windows (PowerShell)**
 
 ```powershell
-python -m venv .venv
+py -3.11 -m venv .venv
 .venv\Scripts\Activate.ps1
 pip install -r requirements.txt
 copy .env.example .env         # then paste your key into .env
 python test.py
 ```
+
+Use Python 3.11 on Windows. The pinned `chromadb` dependency uses
+`chroma-hnswlib==0.7.6`, which has a prebuilt Windows wheel for Python 3.11.
+With newer Python versions, pip tries to compile it and requires Microsoft C++
+Build Tools. If `.venv` was created with a newer Python, rebuild it with 3.11
+before installing the requirements.
 
 **You're ready when `python test.py` passes.** The first run is slow — it
 downloads the embedding model, about 80 MB. That's exactly why this happens

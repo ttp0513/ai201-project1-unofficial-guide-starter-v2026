@@ -71,7 +71,7 @@ def check_python():
             "FAIL",
             "Python version",
             f"Found {actual}. The pinned packages do not support 3.14 yet — "
-            f"install 3.13 and rebuild your virtual environment.",
+            f"install 3.11 on Windows (or 3.11–3.13 elsewhere) and rebuild your virtual environment.",
         )
     report("PASS", "Python version", f"{actual} on {platform.system()}")
 
