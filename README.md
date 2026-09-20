@@ -1,19 +1,7 @@
 # The Unofficial Guide
 
-<!-- Replace this line with your name and which corpus you picked. -->
-
-> **This file is your submission.** Fill it in as you go — most sections get
-> written during the milestone that produces them, not at the end.
->
-> How the starter works, and every command you'll need, is in `RUNNING.md`.
-> Leave that file alone.
->
-> **Paste everything as text.** No screenshots, no video. A typed table gets
-> full credit; a picture of the same table gets none.
->
-> Delete these instruction blocks as you replace them. The `<!-- -->` comments
-> are notes to you and don't show up when the page renders — you can leave them
-> or remove them.
+**Name:** Trong Phan 
+**Corpus:** `campus_life`
 
 ---
 
@@ -26,6 +14,23 @@
      this repo.
 
      Milestone 5. -->
+
+Which corpus I picked:
+- The campus_life corpus contains 88 short posts about student life and campus rules.
+
+Who would use the guide?
+- A student looking for a specific answer without searching through all the posts.
+
+What kinds of question the system answers? 
+- The app answers student questions covered by 88 short campus-life posts, such as:
+  -  How does the housing lottery work?
+  -  When can I add or drop a course?
+  -  How do dining dollars or meal-plan changes work?
+  -  When do study-abroad applications open?
+
+How does it answer and show its source? 
+- The app searches the posts for relevant text, uses that text to generate an answer, and names the source file. If the search finds no close enough match, it should say it lacks enough information.
+
 
 ## Chunking Strategy
 
@@ -56,6 +61,7 @@
 **Chunk 1** — source: `` — produced by: ``
 
 ```
+
 ```
 
 **Chunk 2** — source: `` — produced by: ``
