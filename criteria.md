@@ -55,7 +55,7 @@ in at least 4 of 5 tries.
 
 ---
 
-## 4. Something about your chunks
+## 4. Chunks preserve complete sentences
 
 <!-- YOU WRITE THIS ONE.
 
@@ -69,16 +69,14 @@ in at least 4 of 5 tries.
        - "No chunk is shorter than 200 characters, since anything below that
           in my corpus turned out to be a heading with no content under it." -->
 
+None of the five sampled chunks begins or ends in the middle of a sentence.
 
-
-**Why this target:**
-
+**Why this target:** The `campus_life` documents are short posts, and their useful facts are usually contained in complete sentences. Keeping sentence boundaries intact should be achievable for all five samples and helps prevent a retrieved chunk from leaving out part of a fact.
 
 
 ---
 
-## 5. Your choice
-
+## 5. Answers give accurate timing
 <!-- YOU WRITE THIS ONE TOO.
 
      Pick something you actually care about getting right. It could be about
@@ -88,9 +86,9 @@ in at least 4 of 5 tries.
      outcome. -->
 
 
+For all timing questions, the answer states the time given in its source. An answer fails if it adds a deadline the source does not state.
 
-**Why this target:**
-
+**Why this target:** Some posts give specific time windows that students could act on. Thus timing retrieval should be accurate because an incorrect or invented deadline could mislead someone making a decision.
 
 
 ---
