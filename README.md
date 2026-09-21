@@ -159,14 +159,12 @@ each of my five covered questions.
 
 ## How I Used AI
 
-**1.** I asked Codex to update `chunker.py` for the short `campus_life` posts.
-It changed `split_documents` to keep each current post whole under a
-600-character target, group paragraphs for longer documents, and use zero
-overlap. I reviewed the five printed chunks. Codex then tested a longer example
-and found that one paragraph could exceed 600 characters, so I changed my README
-description to call 600 a soft target rather than a strict maximum.
 
-**2.** I asked Codex for ideas for my fifth acceptance criterion. It first
+
+**1.** I asked AI to inspect the lengths of the `campus_life` posts and
+propose a chunking strategy. It found 88 posts, with the longest at 549 characters, and suggested a 600-character target with zero overlap so each current post stays whole. I used that design let and AI update `chunker.py`. AI then tested a made-up longer document and found that the function could produce a heading-only chunk and a paragraph over 600 characters. Based on that result, I changed my README to describe 600 as a soft target and a longer post may produce a chunk over 600 characters.
+
+**2.** I asked AI for ideas for my fifth acceptance criterion. It first
 suggested checking citation accuracy, which I thought was too close to
 criterion 2's requirement to name a source. I chose timing accuracy instead
 and changed criterion 5 to check my three timing questions at a 3-of-3 target,
