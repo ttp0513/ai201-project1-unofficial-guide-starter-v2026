@@ -69,18 +69,15 @@ in at least 4 of 5 tries.
        - "No chunk is shorter than 200 characters, since anything below that
           in my corpus turned out to be a heading with no content under it." -->
 
-All 5 of the 5 chunks printed by `python app.py --corpus campus_life chunks -n 5`
-must begin and end without cutting a sentence in half.
+The posts are short, so a sentence-aware chunker should preserve boundaries in all five samples. Allowing one cut sentence would accept a problem the chunker can prevent.
 
-**Why this target:** The `campus_life` documents are short posts with useful facts
-in complete sentences. A chunker should be able to preserve those boundaries
-in all five samples; allowing one cut sentence would accept an avoidable loss
-of context.
+**Why this target:** The `campus_life` documents are short posts, and their useful facts are usually contained in complete sentences. Keeping sentence boundaries intact should be achievable for all five samples and helps prevent a retrieved chunk from leaving out part of a fact.
 
 
 ---
 
 ## 5. Answers give accurate timing
+
 <!-- YOU WRITE THIS ONE TOO.
 
      Pick something you actually care about getting right. It could be about
@@ -88,17 +85,10 @@ of context.
      handles badly, about source attribution being correct rather than merely
      present — anything, as long as it names a number or an observable
      outcome. -->
+     
+In each evaluation run, all timing questions must give the time stated in their source and must not add an unsupported date or deadline.
 
-
-In each evaluation run, all 3 of the 3 timing questions in `questions.py` must
-state the time given in the source: dropping a course through the end of week
-six, changing a meal-plan tier in the first ten days of the semester, and
-study-abroad applications opening in October. An answer fails if it adds a
-deadline the source does not state.
-
-**Why this target:** These three posts give explicit time windows that students
-could use to plan. I chose 3 of 3 because each answer can be checked against
-its source, and even one incorrect or invented time could mislead a student.
+**Why this target:** 3 of my five test questions ask about timing, and each source gives a clear time window. I require all three answers to report that timing correctly (3 of 3), because even one wrong time could mislead a student.
 
 
 ---
