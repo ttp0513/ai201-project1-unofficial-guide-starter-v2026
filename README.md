@@ -110,9 +110,6 @@ The good: the shared-bathroom-between-two-rooms arrangement is the best compromi
 The bad: no air conditioning, which matters for the first three weeks of September.
 
 Laundry costs $1.75 wash, $1.75 dry, app-based. On noise: moderate; the building is L-shaped and the short wing is much quieter.
-
-For each one, ask: could someone answer a question using only this,
-without reading what came before or after?
 ```
 
 ## Sample Answer
