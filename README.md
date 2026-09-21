@@ -117,14 +117,23 @@ Laundry costs $1.75 wash, $1.75 dry, app-based. On noise: moderate; the building
 <!-- One complete question and answer, pasted as text, with the source line
      visible. Milestone 4. -->
 
-**Question:**
+**Question:** When do study-abroad applications open for the following academic year?
 
 **Answer:**
 
 ```
+Study-abroad applications open in October for the following academic year (admin_study_abroad.txt).
+
+Sources retrieved: admin_add_drop_deadline.txt, admin_library_holds.txt, admin_study_abroad.txt, advising_registration.txt, course_cs_340.txt
 ```
 
-**My relevance cutoff:**
+**My relevance cutoff:** 0.60. The five questions covered by the corpus had best
+distances from 0.1782 to 0.3942, while the five out-of-scope questions ranged
+from 0.8246 to 0.9340. Lower distances mean closer matches, so 0.60 sits in
+the gap: it passes all five covered questions and refuses all five out-of-scope
+questions in this check. I kept the starter's 0.60 because these measurements
+support it. I also kept `TOP_K = 5` because the correct source ranked first for
+each of my five covered questions.
 
 <!-- The number you set in config.py, and how you got there.
 
@@ -137,7 +146,16 @@ Laundry costs $1.75 wash, $1.75 dry, app-based. On noise: moderate; the building
 
 | Question | In corpus? | Best distance |
 |---|---|---|
-|  |  |  |
+| What determines the housing selection order for juniors and seniors? | Yes | 0.3942 |
+| Through which week can a student drop a course? | Yes | 0.3035 |
+| Do dining dollars roll over from autumn to spring? | Yes | 0.2031 |
+| When can a student change their meal-plan tier? | Yes | 0.1782 |
+| When do study-abroad applications open for the following academic year? | Yes | 0.2344 |
+| What is the capital of Mongolia? | No | 0.8246 |
+| How do I change the oil in a diesel engine? | No | 0.9340 |
+| Who won the 1994 World Cup? | No | 0.8859 |
+| What is the recommended dosage of ibuprofen for a headache? | No | 0.8442 |
+| How do I write a for loop in Rust? | No | 0.8960 |
 
 ## How I Used AI
 
