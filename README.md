@@ -159,18 +159,18 @@ each of my five covered questions.
 
 ## How I Used AI
 
-<!-- Two specific moments. For each: what you asked for, what came back, and
-     what you changed about it.
+**1.** I asked Codex to update `chunker.py` for the short `campus_life` posts.
+It changed `split_documents` to keep each current post whole under a
+600-character target, group paragraphs for longer documents, and use zero
+overlap. I reviewed the five printed chunks. Codex then tested a longer example
+and found that one paragraph could exceed 600 characters, so I changed my README
+description to call 600 a soft target rather than a strict maximum.
 
-     "I asked Claude to write the chunking function from my notes. It ignored
-     the overlap, so I added that myself" is the level of detail we're after.
-     "I used AI to help me code" is not.
-
-     Milestone 5. -->
-
-**1.**
-
-**2.**
+**2.** I asked Codex for ideas for my fifth acceptance criterion. It first
+suggested checking citation accuracy, which I thought was too close to
+criterion 2's requirement to name a source. I chose timing accuracy instead
+and changed criterion 5 to check my three timing questions at a 3-of-3 target,
+counting an invented date or deadline as a failure.
 
 <!-- ── Stretch features ─────────────────────────────────────────────────────
      Doing one? Say so here BEFORE you start. A feature this README never
