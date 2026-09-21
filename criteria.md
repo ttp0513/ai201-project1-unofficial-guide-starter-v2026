@@ -69,9 +69,13 @@ in at least 4 of 5 tries.
        - "No chunk is shorter than 200 characters, since anything below that
           in my corpus turned out to be a heading with no content under it." -->
 
-None of the five sampled chunks begins or ends in the middle of a sentence.
+All 5 of the 5 chunks printed by `python app.py --corpus campus_life chunks -n 5`
+must begin and end without cutting a sentence in half.
 
-**Why this target:** The `campus_life` documents are short posts, and their useful facts are usually contained in complete sentences. Keeping sentence boundaries intact should be achievable for all five samples and helps prevent a retrieved chunk from leaving out part of a fact.
+**Why this target:** The `campus_life` documents are short posts with useful facts
+in complete sentences. A chunker should be able to preserve those boundaries
+in all five samples; allowing one cut sentence would accept an avoidable loss
+of context.
 
 
 ---
@@ -86,9 +90,15 @@ None of the five sampled chunks begins or ends in the middle of a sentence.
      outcome. -->
 
 
-For all timing questions, the answer states the time given in its source. An answer fails if it adds a deadline the source does not state.
+In each evaluation run, all 3 of the 3 timing questions in `questions.py` must
+state the time given in the source: dropping a course through the end of week
+six, changing a meal-plan tier in the first ten days of the semester, and
+study-abroad applications opening in October. An answer fails if it adds a
+deadline the source does not state.
 
-**Why this target:** Some posts give specific time windows that students could act on. Thus timing retrieval should be accurate because an incorrect or invented deadline could mislead someone making a decision.
+**Why this target:** These three posts give explicit time windows that students
+could use to plan. I chose 3 of 3 because each answer can be checked against
+its source, and even one incorrect or invented time could mislead a student.
 
 
 ---
