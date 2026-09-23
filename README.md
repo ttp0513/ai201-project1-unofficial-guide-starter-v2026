@@ -197,15 +197,140 @@ counting an invented date or deadline as a failure.
 
 | Criterion | Target | Run 1 | Run 2 | Run 3 | Verdict |
 |---|---|---|---|---|---|
-| 1. Retrieved chunk contains the answer | 4 of 5 |  |  |  |  |
-| 2. Every answer names a source | 5 of 5 |  |  |  |  |
-| 3. Gate stops out-of-corpus questions | 4 of 5 |  |  |  |  |
-| 4. | | | | | |
-| 5. | | | | | |
+| 1. Retrieved chunk contains the answer | 4 of 5 | 5/5 | 5/5 | 5/5 | MET |
+| 2. Every answer names a source | 5 of 5 | 5/5 | 5/5 | 5/5 | MET |
+| 3. Gate stops out-of-corpus questions | 4 of 5 | 5/5 | 5/5 | 5/5 | MET |
+| 4. Chunks preserve complete sentences | 5 of 5 | 5/5 | 5/5 | 5/5 | MET |
+| 5. Answers give accurate timing | 3 of 3 | 3/3 | 3/3 | 3/3 | MET |
 
 <!-- Underneath, paste the REAL output for each criterion from one of your
      runs — the actual text your system produced, not a description of it.
      Name the file and function that produced it. -->
+
+### Evidence for Criterion 1 - Retrieved chunk contains the answer
+
+From `results/run_2026-09-23_1838_before.md`, produced by
+`run_eval.py::run_once`, using `store.py::search` and chunks from
+`chunker.py::split_documents`.
+
+```text
+Question: What determines the housing selection order for juniors and seniors?
+Best distance: 0.3942
+Sources retrieved: admin_housing_lottery.txt, dining_the_atrium_followup.txt, housing_aldridge_hall.txt, housing_old_brewhouse.txt, housing_tamsin_court.txt
+
+[from admin_housing_lottery.txt]
+The housing lottery is not random in the way most people assume. Rising
+sophomores get a number drawn at random, but juniors and seniors are ordered
+by accumulated credit hours first, and only tie-break randomly.
+```
+
+### Evidence for Criterion 2 - Every answer names a source
+
+From run 1 in `results/run_2026-09-23_1838_before.md`, produced by
+`run_eval.py::run_once` and `generate.py::answer_from_chunks`.
+
+```text
+Question: What determines the housing selection order for juniors and seniors?
+Run: 1
+
+For juniors and seniors, the housing selection order is determined first by
+accumulated credit hours, with random tie-breaking used only when there is a
+tie (admin_housing_lottery.txt).
+
+Question: Through which week can a student drop a course?
+Run: 1
+
+A student can drop a course through the end of week six.
+
+Source: admin_withdrawal_deadline.txt
+(also mentioned in admin_add_drop_deadline.txt)
+
+Question: Do dining dollars roll over from autumn to spring?
+Run: 1
+
+Yes, dining dollars roll over from the autumn semester to the spring semester
+(admin_dining_dollars.txt).
+
+Question: When can a student change their meal-plan tier?
+Run: 1
+
+A student can change their meal plan tier once during the first ten days of
+the semester.
+
+Source: admin_meal_plan_changes.txt
+
+Question: When do study-abroad applications open for the following academic year?
+Run: 1
+
+Study-abroad applications open in October for the following academic year
+(admin_study_abroad.txt).
+```
+
+### Evidence for Criterion 3 - Gate stops out-of-corpus questions
+
+From `results/run_2026-09-23_1838_before.md`, produced by
+`run_eval.py::check_out_of_scope` and `gate.py::check`.
+
+```text
+Produced by run_eval.py::check_out_of_scope, cutoff 0.6. Refused 5 of 5.
+```
+
+| Out-of-scope question | Best distance | Gate |
+|---|---|---|
+| What is the capital of Mongolia? | 0.825 | refused |
+| How do I change the oil in a diesel engine? | 0.934 | refused |
+| Who won the 1994 World Cup? | 0.886 | refused |
+| What is the recommended dosage of ibuprofen for a headache? | 0.844 | refused |
+| How do I write a for loop in Rust? | 0.896 | refused |
+
+
+### Evidence for Criterion 4 - Chunks preserve complete sentences
+
+From `python app.py --corpus campus_life chunks -n 5`, produced by
+`app.py::cmd_chunks` and `chunker.py::split_documents`.
+
+```text
+Chunk 1 | source: admin_add_drop_deadline.txt#0
+produced by: chunker.py::split_documents
+
+On the add/drop deadline
+
+You can add a course through the end of the second week. Dropping is a longer
+window — through the end of week six — but a drop after week two shows as a W
+on your transcript. Nothing anywhere on the registrar's site says this plainly,
+and students find out from each other.
+```
+
+The other four complete chunks are already preserved verbatim under your Unit 1 **Sample Chunks** section. If your instructor expects all five repeated here, copy that complete five-chunk block instead of only this representative example.
+
+### Evidence for Criterion 5 - Answers give accurate timing
+
+From run 1 in `results/run_2026-09-23_1838_before.md`, produced by
+`run_eval.py::run_once` and `generate.py::answer_from_chunks`.
+
+```text
+Question: Through which week can a student drop a course?
+Run: 1
+
+A student can drop a course through the end of week six.
+
+Source: admin_withdrawal_deadline.txt
+(also mentioned in admin_add_drop_deadline.txt)
+
+Question: When can a student change their meal-plan tier?
+Run: 1
+
+A student can change their meal plan tier once during the first ten days of
+the semester.
+
+Source: admin_meal_plan_changes.txt
+
+Question: When do study-abroad applications open for the following academic year?
+Run: 1
+
+Study-abroad applications open in October for the following academic year
+(admin_study_abroad.txt).
+```
 
 ## Verdicts
 
