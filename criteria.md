@@ -15,6 +15,10 @@ pipeline earns credit; *"80% seemed reasonable"* does not.
 > Missing your own targets next unit costs you nothing. Setting a target so
 > easy you can't miss it does.
 
+> **Unit 2 completion note:** I noticed after the initial baseline run that the
+> explanations for criteria 1–3 were blank. I added the explanations below
+> without changing any of the original targets.
+
 ---
 
 ## 1. Retrieved chunks contain the answer
@@ -22,9 +26,10 @@ pipeline earns credit; *"80% seemed reasonable"* does not.
 For at least 4 of my 5 test questions, the retrieved chunks include one that
 contains the answer.
 
-**Why this target:**
-<!-- e.g. "One of my questions is about a topic only two documents mention, so
-     I expect that one to be hard." -->
+**Why this target:** Each test question asks for a specific fact from one short
+`campus_life` post, so the correct evidence should normally appear in the
+retrieved chunks. I required 4 of 5 because related posts about housing,
+courses, and dining can compete with the exact source in semantic search, while a lower target would allow too many questions to lack usable evidence.
 
 ---
 
@@ -32,9 +37,11 @@ contains the answer.
 
 Every answer the system produces names at least one source document.
 
-**Why this target:**
-<!-- Why all five and not four? What about your setup makes that achievable —
-     or what would have to go wrong for it not to be? -->
+**Why this target:** The pipeline keeps each chunk's source filename and the
+grounding instruction tells the model to name the file it used, so requiring a
+source in all 5 answers is achievable. Allowing even one answer without a
+source would prevent a student from checking that answer against the original
+post.
 
 ---
 
@@ -49,9 +56,11 @@ in at least 4 of 5 tries.
      what happened into your run log. Swap them for your own if you'd rather —
      just keep five of them, or the "4 of 5" above has nothing to be 4 of. -->
 
-**Why this target:**
-<!-- What did your distances look like when you set the cutoff in Milestone 4?
-     Was there a clean gap, or did the two groups overlap? -->
+**Why this target:** During cutoff tuning, the covered questions had best
+distances from 0.1782 to 0.3942, while the out-of-scope questions ranged from
+0.8246 to 0.9340. The 0.60 cutoff sits in that gap. I required at least 4 of 5
+refusals because an accidental semantic match may let one unrelated question
+through, while allowing two or more would make the gate unreliable.
 
 ---
 
