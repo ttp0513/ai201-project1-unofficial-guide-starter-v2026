@@ -162,13 +162,33 @@ each of my five covered questions.
 
 
 **1.** I asked AI to inspect the lengths of the `campus_life` posts and
-propose a chunking strategy. It found 88 posts, with the longest at 549 characters, and suggested a 600-character target with zero overlap so each current post stays whole. I used that design let and AI update `chunker.py`. AI then tested a made-up longer document and found that the function could produce a heading-only chunk and a paragraph over 600 characters. Based on that result, I changed my README to describe 600 as a soft target and a longer post may produce a chunk over 600 characters.
+propose a chunking strategy. It found 88 posts, with the longest at 549
+characters, and suggested a 600-character target with zero overlap so each
+current post stays whole. I used that design and asked AI to update
+`chunker.py`. AI then tested a made-up longer document and found that the
+function could produce a heading-only chunk and a paragraph over 600
+characters. Based on that result, I changed my README to describe 600 as a
+soft target because a longer paragraph may produce a chunk over 600
+characters.
 
 **2.** I asked AI for ideas for my fifth acceptance criterion. It first
 suggested checking citation accuracy, which I thought was too close to
 criterion 2's requirement to name a source. I chose timing accuracy instead
 and changed criterion 5 to check my three timing questions at a 3-of-3 target,
 counting an invented date or deadline as a failure.
+
+**3.** In Unit 2, I asked AI to pressure-test my conclusion after all five
+criteria passed. It pointed out that the correct source ranked first while
+several fourth and fifth results were unrelated. I used that observation to
+choose one measurable change: reducing `TOP_K` from 5 to 3, then rerunning the
+same evaluation instead of inventing a failure.
+
+**4.** I asked AI to compare my Before and After write-ups with the raw result
+files. It found that an early draft incorrectly said retrieval returned the
+same sources. I corrected the claim to say that the best distances and
+first-ranked sources stayed the same while each prompt used two fewer chunks.
+I described this as 40% fewer retrieved chunks and did not claim an exact token
+or cost reduction because I did not measure tokens.
 
 <!-- ── Stretch features ─────────────────────────────────────────────────────
      Doing one? Say so here BEFORE you start. A feature this README never
