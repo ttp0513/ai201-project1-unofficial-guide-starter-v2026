@@ -534,6 +534,9 @@ Study-abroad applications open in October for the following academic year (Sourc
 
      Milestone 4. -->
 
+I reduced TOP_K from 5 to 3. This reduced the retrieved context from five chunks to three chunks per question, a 40% reduction in the number of chunks sent to the model, while all five acceptance criteria remained MET. The smaller context should reduce prompt token usage and cost, although I did not measure the exact token count.
+Overall, the second evaluation confirmed stability. All five criteria remained MET in all three runs. Retrieval returned the same sources at the same distances, the gate again refused 5 of 5 out-of-scope questions, and the answer wording varied while preserving the same facts and source citations.
+
 ## What's Still Broken
 
 <!-- For each criterion still missed after your fix: what you'd do about it,
