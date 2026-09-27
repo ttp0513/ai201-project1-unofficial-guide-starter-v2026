@@ -203,6 +203,9 @@ counting an invented date or deadline as a failure.
 | 4. Chunks preserve complete sentences | 5 of 5 | 5/5 | 5/5 | 5/5 | MET |
 | 5. Answers give accurate timing | 3 of 3 | 3/3 | 3/3 | 3/3 | MET |
 
+Manually scored by comparing each answer below with the expected fact in
+`questions.py`. All 15 answers contain the expected fact.
+
 <!-- Underneath, paste the REAL output for each criterion from one of your
      runs — the actual text your system produced, not a description of it.
      Name the file and function that produced it. -->
@@ -345,11 +348,11 @@ Study-abroad applications open in October for the following academic year
 
 | # | Criterion | Verdict | How I decided |
 |---|---|---|---|
-| 1 |  |  |  |
-| 2 |  |  |  |
-| 3 |  |  |  |
-| 4 |  |  |  |
-| 5 |  |  |  |
+| 1 | Retrieved chunk contains the answer | MET | The retrieved chunks contained the expected fact for all 5 questions in every run, exceeding the 4-of-5 target. |
+| 2 | Every answer names a source | MET | All 5 answers named at least one source file in each of the three runs, meeting the 5-of-5 target. |
+| 3 | Gate stops out-of-corpus questions | MET | The relevance gate refused all 5 out-of-scope questions at the 0.60 cutoff, exceeding the 4-of-5 target. Retrieval and the gate are deterministic, so this result applies to all three columns. |
+| 4 | Chunks preserve complete sentences | MET | All 5 sampled chunks read as complete thoughts without a sentence cut off at either boundary, meeting the 5-of-5 target. |
+| 5 | Answers give accurate timing | MET | All 3 timing answers reported the time stated in the source without inventing a date or deadline in every run, meeting the 3-of-3 target. |
 
 ## Diagnoses
 
@@ -370,6 +373,15 @@ Study-abroad applications open in October for the following academic year
      low, and which one you'd tighten and to what.
 
      Milestone 3. -->
+
+All five criteria were met in every run, so I did not identify a failed
+pipeline stage. The test set was relatively straightforward because each
+question asks for a fact stated directly in one short `campus_life` post.
+Criteria 1 and 3 were also conservative: both required 4 of 5, while the
+system achieved 5 of 5. I would tighten criterion 1 to require the
+answer-containing source to rank first for all 5 questions, because merely
+appearing somewhere in five retrieved chunks allows unrelated material into
+the prompt.
 
 ## The Improvement
 
