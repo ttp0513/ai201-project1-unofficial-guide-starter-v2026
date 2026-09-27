@@ -534,10 +534,17 @@ Study-abroad applications open in October for the following academic year (Sourc
 
      Milestone 4. -->
 
-I reduced TOP_K from 5 to 3. This reduced the retrieved context from five chunks to three chunks per question, a 40% reduction in the number of chunks sent to the model, while all five acceptance criteria remained MET. The smaller context should reduce prompt token usage and cost, although I did not measure the exact token count.
-Overall, the second evaluation confirmed stability. All five criteria remained MET in all three runs. Retrieval returned the same sources at the same distances, the gate again refused 5 of 5 out-of-scope questions, and the answer wording varied while preserving the same facts and source citations.
+I reduced `TOP_K` from 5 to 3. This reduced the retrieved context from five
+chunks to three chunks per question, a 40% reduction in the number of chunks
+sent to the model, while all five acceptance criteria remained MET. The
+smaller context should reduce prompt token usage and cost, although I did not
+measure the exact token count. The correct source remained ranked first with
+the same best distance for every test question, the gate again refused 5 of 5
+out-of-scope questions, and the answers preserved the expected facts and
+source citations across all three runs.
 
 ## What's Still Broken
+
 
 <!-- For each criterion still missed after your fix: what you'd do about it,
      and why you stopped where you did.
@@ -547,9 +554,37 @@ Overall, the second evaluation confirmed stability. All five criteria remained M
 
      Milestone 5. -->
 
+No acceptance criterion remained missed after the change. However, reducing
+`TOP_K` removed the fourth and fifth results without guaranteeing that all
+three remaining chunks support the question. For example, the study-abroad
+question still retrieved add/drop and advising documents in addition to the
+correct study-abroad source. These extra chunks make the prompt longer and
+could distract generation on a harder question.
+
+The evaluation also covers only five direct fact questions from short posts
+and was scored manually. It does not show how the system handles paraphrased
+questions, conflicting sources, or questions that require combining multiple
+documents. I stopped at `TOP_K = 3` because all current criteria still passed;
+choosing a smaller value responsibly would require a broader retrieval test
+set. I would also measure prompt tokens directly before claiming an exact cost
+saving.
+
+
 ## What I'd Do Differently
 
 <!-- Knowing what you know now — which of your five criteria would you write
      differently, and why?
 
      Milestone 5. -->
+
+I would make criterion 1 stricter: for all 5 test questions, the first-ranked
+chunk must contain the answer. The original 4-of-5 criterion only required the
+answer to appear somewhere in the retrieved set, so it did not measure ranking
+quality or penalize unrelated chunks below the correct result.
+
+I would also strengthen criterion 2 to require every answer to name a source
+that directly supports its claim. Requiring any filename is too loose because
+an answer could cite an unrelated retrieved document and still pass. This
+revised criterion would measure citation correctness as well as citation
+presence.
+
