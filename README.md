@@ -386,11 +386,16 @@ the prompt.
 ## The Improvement
 
 **What I changed:**
+Since the correct source ranked first in all five cases, and the extra chunks make the prompt longer and could distract the generator on a harder question, I reduced top-K from 5 to 3 so the prompt contains less unrelated material while reducing token costs. 
 
 **Why I picked it:**
 
 <!-- Connect it to a specific diagnosis above in one sentence. If you can't,
      you picked a fix because it sounded impressive. -->
+
+Again, the correct source ranked first for all 5 test questions, but several 4th and 5th results were unrelated. Reducing top-k should remove distracting context and shorten the prompt without losing the answer-containing chunk.
+Also, reducing number of chunks makes prompt shorter, thus costing less tokens. 
+
 
 ### Run Log — After
 
