@@ -159,8 +159,6 @@ each of my five covered questions.
 
 ## How I Used AI
 
-
-
 **1.** I asked AI to inspect the lengths of the `campus_life` posts and
 propose a chunking strategy. It found 88 posts, with the longest at 549
 characters, and suggested a 600-character target with zero overlap so each
@@ -323,8 +321,6 @@ window — through the end of week six — but a drop after week two shows as a 
 on your transcript. Nothing anywhere on the registrar's site says this plainly,
 and students find out from each other.
 ```
-
-The other four complete chunks are already preserved verbatim under your Unit 1 **Sample Chunks** section. If your instructor expects all five repeated here, copy that complete five-chunk block instead of only this representative example.
 
 ### Evidence for Criterion 5 - Answers give accurate timing
 
