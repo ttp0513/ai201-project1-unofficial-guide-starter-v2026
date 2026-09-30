@@ -9,26 +9,24 @@
 
 ## What This Does
 
-<!-- Three or four sentences. Which corpus you picked, and the kinds of
-     questions your system answers. Write it for someone who has never seen
-     this repo.
-
-     Milestone 5. -->
-
 Which corpus I picked:
+
 - The campus_life corpus contains 88 short posts about student life and campus rules.
 
 Who would use the guide?
+
 - A student looking for a specific answer without searching through all the posts.
 
-What kinds of question the system answers? 
+What kinds of questions does the system answer?
+
 - The app answers student questions covered by 88 short campus-life posts, such as:
   -  How does the housing lottery work?
   -  When can I add or drop a course?
   -  How do dining dollars or meal-plan changes work?
   -  When do study-abroad applications open?
 
-How does it answer and show its source? 
+How does it answer and show its source?
+
 - The app searches the posts for relevant text, uses that text to generate an answer, and names the source file. If the search finds no close enough match, it should say it lacks enough information.
 
 
@@ -37,28 +35,12 @@ How does it answer and show its source?
 **Chunk size:** 600
 **Overlap:** 0
 
-A length check found that all 88 campus_life posts are under 550 characters. I chose a 600 character so each current post stays in one chunk with its heading and facts together. I chose zero overlap because none of these posts needs a second chunk. The target is soft for longer documents.
-
-<!-- What about YOUR documents made you pick these numbers? Short posts and
-     long sectioned guides don't want the same chunking, and "800 seemed
-     reasonable" earns nothing. Point at something you noticed when you read
-     the documents in Milestone 1.
-
-     If you changed your mind partway through, say so and say why. That's worth
-     more than pretending you got it right first time.
-
-     Milestone 3. -->
+A length check found that all 88 `campus_life` posts are under 550 characters.
+I chose a 600-character target so each current post stays in one chunk with its
+heading and facts together. I chose zero overlap because none of these posts
+needs a second chunk. The target is soft for longer documents.
 
 ## Sample Chunks
-
-<!-- Five chunks, pasted as text. Label each one and name the file it came from
-     AND the function that produced it — the grader checks your code against
-     what you claim here.
-
-     `python app.py chunks -n 5` prints all three for you. Copy them straight
-     across.
-
-     Milestone 3. -->
 
 **Chunk 1** —  source: admin_add_drop_deadline.txt#0  |  produced by: chunker.py::split_documents
 
@@ -114,9 +96,6 @@ Laundry costs $1.75 wash, $1.75 dry, app-based. On noise: moderate; the building
 
 ## Sample Answer
 
-<!-- One complete question and answer, pasted as text, with the source line
-     visible. Milestone 4. -->
-
 **Question:** When do study-abroad applications open for the following academic year?
 
 **Answer:**
@@ -134,15 +113,6 @@ the gap: it passes all five covered questions and refuses all five out-of-scope
 questions in this check. I kept the starter's 0.60 because these measurements
 support it. I also kept `TOP_K = 5` because the correct source ranked first for
 each of my five covered questions.
-
-<!-- The number you set in config.py, and how you got there.
-
-     You ran five questions your corpus covers and the five in OUT_OF_SCOPE
-     that it clearly doesn't, and wrote down the best distance for each. What
-     did those two groups look like? Where was the gap? Put the actual numbers
-     here — the table below wants all ten rows.
-
-     Milestone 4. -->
 
 | Question | In corpus? | Best distance |
 |---|---|---|
@@ -188,30 +158,11 @@ first-ranked sources stayed the same while each prompt used two fewer chunks.
 I described this as 40% fewer retrieved chunks and did not claim an exact token
 or cost reduction because I did not measure tokens.
 
-<!-- ── Stretch features ─────────────────────────────────────────────────────
-     Doing one? Say so here BEFORE you start. A feature this README never
-     claims earns nothing.
-     ───────────────────────────────────────────────────────────────────────── -->
-
 ---
 
 # Unit 2
 
-<!-- These sections get ADDED to what's already above. Don't delete or rewrite
-     unit 1 — the point is that someone can see what you said before you knew
-     how it went. -->
-
 ## Run Log — Before
-
-<!-- Your five criteria, three runs each. `python run_eval.py --label before`
-     runs the questions, puts the OUT_OF_SCOPE ones through the gate, and
-     writes it all into results/ for you. Targets come from criteria.md; the
-     verdict column is your call.
-
-     Criterion 3 is measured in one deterministic pass rather than three, so
-     the same number goes in all three run columns. That's correct, not lazy.
-
-     Milestone 1. -->
 
 | Criterion | Target | Run 1 | Run 2 | Run 3 | Verdict |
 |---|---|---|---|---|---|
@@ -223,10 +174,6 @@ or cost reduction because I did not measure tokens.
 
 Manually scored by comparing each answer below with the expected fact in
 `questions.py`. All 15 answers contain the expected fact.
-
-<!-- Underneath, paste the REAL output for each criterion from one of your
-     runs — the actual text your system produced, not a description of it.
-     Name the file and function that produced it. -->
 
 ### Evidence for Criterion 1 - Retrieved chunk contains the answer
 
@@ -353,15 +300,6 @@ Study-abroad applications open in October for the following academic year
 
 ## Verdicts
 
-<!-- MET or MISSED for each of the five, against the target you wrote last
-     unit — not a new one. Plus a sentence on how you decided. That sentence
-     matters most where it was close.
-
-     If your target said 4 of 5 and your runs came out 4, 3, 4, that's a MISS.
-     The target has to hold, not show up occasionally.
-
-     Milestone 2. -->
-
 | # | Criterion | Verdict | How I decided |
 |---|---|---|---|
 | 1 | Retrieved chunk contains the answer | MET | The retrieved chunks contained the expected fact for all 5 questions in every run, exceeding the 4-of-5 target. |
@@ -371,24 +309,6 @@ Study-abroad applications open in October for the following academic year
 | 5 | Answers give accurate timing | MET | All 3 timing answers reported the time stated in the source without inventing a date or deadline in every run, meeting the 3-of-3 target. |
 
 ## Diagnoses
-
-<!-- For each miss: which stage caused it, and how. The stage alone isn't
-     enough — you need the mechanism.
-
-     Not a diagnosis: "Question 3 didn't work."
-     A diagnosis:     "Question 3 asks about laundry costs. The answer is in
-                       one sentence that got split across two chunks, so
-                       neither chunk on its own contains it."
-
-     The five stages: loading → chunking → embedding → retrieval → generation.
-
-     Look for a pattern. If three misses all ask about numbers, that's one
-     problem, not three.
-
-     Missed nothing? Say so, then say honestly whether your targets were set
-     low, and which one you'd tighten and to what.
-
-     Milestone 3. -->
 
 All five criteria were met in every run, so I did not identify a failed
 pipeline stage. The test set was relatively straightforward because each
@@ -402,21 +322,20 @@ the prompt.
 ## The Improvement
 
 **What I changed:**
-Since the correct source ranked first in all five cases, and the extra chunks make the prompt longer and could distract the generator on a harder question, I reduced top-K from 5 to 3 so the prompt contains less unrelated material while reducing token costs. 
+Since the correct source ranked first in all five cases, and the extra chunks
+make the prompt longer and could distract the generator on a harder question,
+I reduced top-K from 5 to 3 so the prompt contains less unrelated material. I
+did not measure a token or cost reduction in these historical runs.
 
 **Why I picked it:**
 
-<!-- Connect it to a specific diagnosis above in one sentence. If you can't,
-     you picked a fix because it sounded impressive. -->
-
-Again, the correct source ranked first for all 5 test questions, but several 4th and 5th results were unrelated. Reducing top-k should remove distracting context and shorten the prompt without losing the answer-containing chunk.
-Also, reducing number of chunks makes prompt shorter, thus costing less tokens. 
+Again, the correct source ranked first for all 5 test questions, but several
+4th and 5th results were unrelated. Reducing top-k should remove distracting
+context without losing the answer-containing chunk. The measured outcome for
+this run was the number of retrieved chunks, not token cost.
 
 
 ### Run Log — After
-
-<!-- Same format, same five criteria, three runs each.
-     `python run_eval.py --label after` -->
 
 | Criterion | Target | Run 1 | Run 2 | Run 3 | Verdict |
 |---|---|---|---|---|---|
@@ -543,13 +462,6 @@ Study-abroad applications open in October for the following academic year (Sourc
 
 **Did it help?**
 
-<!-- Say plainly whether it did, and how you know. If it made things worse,
-     say that — a change that backfired, honestly reported, earns full credit
-     and is more interesting than one that worked. What matters is that you can
-     tell.
-
-     Milestone 4. -->
-
 I reduced `TOP_K` from 5 to 3. This reduced the retrieved context from five
 chunks to three chunks per question, a 40% reduction in the number of chunks
 sent to the model, while all five acceptance criteria remained MET. The
@@ -561,15 +473,6 @@ source citations across all three runs.
 
 ## What's Still Broken
 
-
-<!-- For each criterion still missed after your fix: what you'd do about it,
-     and why you stopped where you did.
-
-     "I ran out of time" is fine if it's true. Pretending nothing is left is
-     not.
-
-     Milestone 5. -->
-
 No acceptance criterion remained missed after the change. However, reducing
 `TOP_K` removed the fourth and fifth results without guaranteeing that all
 three remaining chunks support the question. For example, the study-abroad
@@ -577,21 +480,22 @@ question still retrieved add/drop and advising documents in addition to the
 correct study-abroad source. These extra chunks make the prompt longer and
 could distract generation on a harder question.
 
-The evaluation also covers only five direct fact questions from short posts
-and was scored manually. It does not show how the system handles paraphrased
-questions, conflicting sources, or questions that require combining multiple
-documents. I stopped at `TOP_K = 3` because all current criteria still passed;
-choosing a smaller value responsibly would require a broader retrieval test
-set. I would also measure prompt tokens directly before claiming an exact cost
-saving.
+The historical evaluation also covers only five direct fact questions from
+short posts. It does not show how the system handles paraphrased questions,
+conflicting sources, or questions that require combining multiple documents.
+I stopped at `TOP_K = 3` because all current criteria still passed; choosing a
+smaller value responsibly would require a broader retrieval test set.
+
+After review, I added `scorer.py`, which checks each answer against the expected
+fact already stored in `questions.py`. New runs therefore score factual answers
+the same way every time. I also changed `run_eval.py::write_report` to save the
+model-call count and service-reported input/output token totals in each run log,
+instead of printing those measurements only to the terminal. The committed
+historical logs predate that instrumentation, so I do not claim a measured
+token saving from them.
 
 
 ## What I'd Do Differently
-
-<!-- Knowing what you know now — which of your five criteria would you write
-     differently, and why?
-
-     Milestone 5. -->
 
 I would make criterion 1 stricter: for all 5 test questions, the first-ranked
 chunk must contain the answer. The original 4-of-5 criterion only required the
@@ -603,4 +507,11 @@ that directly supports its claim. Requiring any filename is too loose because
 an answer could cite an unrelated retrieved document and still pass. This
 revised criterion would measure citation correctness as well as citation
 presence.
+
+I would change the order of the experiment as well. First I would define and
+score the stricter metric, then record a `TOP_K = 5` baseline, change only
+`TOP_K`, and repeat the same evaluation at `TOP_K = 3`. For the context-size
+change, the useful comparison is service-reported input tokens per run; the
+original five criteria were already passing and could not show whether the
+smaller prompt helped.
 

@@ -182,6 +182,18 @@ def write_report(rows, transcript, gate_rows, args, corpus, top_k, threshold, sc
     label = f"_{args.label}" if args.label else ""
     path = config.RESULTS_DIR / f"run_{stamp}{label}.md"
 
+    # Generation usage used to be printed only after the report was written,
+    # which meant the evidence disappeared with the terminal session. Capture
+    # the service-reported totals in the committed artifact as well.
+    import generate as gen
+
+    tokens = gen.token_counts()
+    token_summary = (
+        f"{tokens['total']} ({tokens['prompt']} input, {tokens['output']} output)"
+        if tokens["total"]
+        else "unavailable from the service"
+    )
+
     n = len(rows[0]["runs"]) if rows else 0
     run_headers = " | ".join(f"Run {i}" for i in range(1, n + 1))
     run_divider = "|".join(["---"] * n)
@@ -194,6 +206,9 @@ def write_report(rows, transcript, gate_rows, args, corpus, top_k, threshold, sc
         f"- Corpus: `{corpus}` (index variant `{args.variant}`)",
         f"- top-k: {top_k} · relevance cutoff: {threshold}",
         f"- Runs per question: {n}, caching off",
+        f"- Answer scoring: {'`scorer.py::judge`' if scored else 'manual (no scorer loaded)'}",
+        f"- Model calls: {gen.call_count()}",
+        f"- Tokens: {token_summary}",
         f"- When: {dt.datetime.now().strftime('%Y-%m-%d %H:%M')}",
         "",
         "This table is one row per QUESTION. The run log your README asks for is",
@@ -262,8 +277,6 @@ def write_report(rows, transcript, gate_rows, args, corpus, top_k, threshold, sc
         ]
 
     path.write_text("\n".join(lines), encoding="utf-8")
-
-    import generate as gen
 
     print(f"\nWrote {path.relative_to(config.ROOT)}")
     print(gen.usage())
